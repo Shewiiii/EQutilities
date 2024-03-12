@@ -1,0 +1,113 @@
+[
+    {
+        "name": "b2_to_storm2",
+        "preamp": 0.0,
+        "parametric": true,
+        "bands": [
+            {
+                "type": 0,
+                "channels": 0,
+                "frequency": 90,
+                "q": 0,
+                "gain": 0.0,
+                "color": 0
+            },
+            {
+                "type": 1,
+                "channels": 0,
+                "frequency": 10000,
+                "q": 0,
+                "gain": 0.0,
+                "color": 0
+            },
+            {
+                "type": 3,
+                "channels": 0,
+                "frequency": 24,
+                "q": 0.5,
+                "gain": 1.5,
+                "color": -15728300
+            },
+            {
+                "type": 3,
+                "channels": 0,
+                "frequency": 52,
+                "q": 0.1,
+                "gain": 3.8,
+                "color": -8965675
+            },
+            {
+                "type": 3,
+                "channels": 0,
+                "frequency": 160,
+                "q": 0.8,
+                "gain": -2.3,
+                "color": -6520059
+            },
+            {
+                "type": 3,
+                "channels": 0,
+                "frequency": 2000,
+                "q": 0.9,
+                "gain": -1.4,
+                "color": -15402785
+            },
+            {
+                "type": 3,
+                "channels": 0,
+                "frequency": 2600,
+                "q": 4.3,
+                "gain": -1.6,
+                "color": -2997523
+            },
+            {
+                "type": 3,
+                "channels": 0,
+                "frequency": 4100,
+                "q": 5.0,
+                "gain": 1.6,
+                "color": -1620252
+            },
+            {
+                "type": 3,
+                "channels": 0,
+                "frequency": 7600,
+                "q": 2.4,
+                "gain": 4.1,
+                "color": -14165363
+            },
+            {
+                "type": 3,
+                "channels": 0,
+                "frequency": 7700,
+                "q": 5.0,
+                "gain": -16.7,
+                "color": -4346373
+            },
+            {
+                "type": 3,
+                "channels": 0,
+                "frequency": 10000,
+                "q": 2.9,
+                "gain": 5.6,
+                "color": -7368873
+            },
+            {
+                "type": 3,
+                "channels": 0,
+                "frequency": 15000,
+                "q": 5.0,
+                "gain": 8.5,
+                "color": -14838791
+            },
+            {
+                "type": 3,
+                "channels": 0,
+                "frequency": 220,
+                "q": 1.0,
+                "gain": -2.0,
+                "color": -10941605
+            }
+        ]
+    }
+]
