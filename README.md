@@ -10,7 +10,7 @@ This repo should be used with [Listener's Graph Database](https://listener800.gi
 ## Import and visualize the Frequency Response of an IEM
 1. Download the txt file in the `frequency_responses` folder of the IEM you want.
 2. Open [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0).
-3. Click on `Equalizer`, then on `Import FR`.
+3. Click on `Equalizer`, then on `Upload FR`.
 4. Select the txt file.
 5. (Optional) Ajust the level of the Frequency Response by using the arrows on the new entry.
 6. Chose the target with the settings you want.
@@ -47,7 +47,7 @@ In order to do this, follow the steps above, but instead of using the default ta
 1. Copy the repo.
 2. On [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0), click on `Export Parametric EQ` to export the EQ profile you have just made, and save it in the `input_ParaEQ` folder.
 3. Open `paraToIIRconverter.py` and edit the `file` variable to the name of the file you have saved.
-4. Execute the file. A JSON file will be created in the `output_IIR` folder, and the EQ string will be displayed in the console.
+4. Execute the file. A txt file will be created in the `output_IIR` folder, and the EQ string will be displayed in the console.
 5. Copy the string in HQPlayer: in the software, click on `Matrix`, then `Pipeline setup...`
 6. In the first 2 raws, copy the string in the `Process` column
 7. Put de pre-gain value in the `Gain` column
