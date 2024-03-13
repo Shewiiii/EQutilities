@@ -47,7 +47,7 @@ In order to do this, follow the steps above, but instead of using the default ta
 1. Copy the repo.
 2. On [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0), click on `Export Parametric EQ` to export the EQ profile you have just made, and save it in the `input_ParaEQ` folder.
 3. Open `paraToIIRconverter.py` and edit the `file` variable to the name of the file you have saved.
-4. Execute the file. A JSON file will be created in the `output_IIR` folder, and the EQ string will be displayed in the console.
+4. Execute the file. A txt file will be created in the `output_IIR` folder, and the EQ string will be displayed in the console.
 5. Copy the string in HQPlayer: in the software, click on `Matrix`, then `Pipeline setup...`
 6. In the first 2 raws, copy the string in the `Process` column
 7. Put de pre-gain value in the `Gain` column
