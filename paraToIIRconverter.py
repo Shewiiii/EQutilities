@@ -1,7 +1,7 @@
 import re
 
-def getValues(fichier:str): #type 1: IIR, type 2: JSON
-    with open(f"input_ParaEQ/{fichier}.txt", 'r', encoding='UTF-8') as f:
+def getValues(file:str): #type 1: IIR, type 2: JSON
+    with open(f"input_ParaEQ/{file}.txt", 'r', encoding='UTF-8') as f:
         parametres = f.readlines()[1:]
         paraFiltres = []
         for i in parametres:
@@ -20,17 +20,17 @@ def getValues(fichier:str): #type 1: IIR, type 2: JSON
         valeurs.append([typePara] + re.findall(r'\d+', i)[1:] + [negatif])
     return valeurs
 
-def paraToIIR(fichier:str):
-    valeurs = getValues(fichier)
+def paraToIIR(file:str):
+    valeurs = getValues(file)
     print(valeurs)
     string = ""
     for filtre in valeurs:
         print(filtre)
         string = string + f"iir:type={filtre[0]};f={filtre[1]};g={filtre[6]+filtre[2]+"."+filtre[3]};q={filtre[4]+"."+filtre[5]},"
     print(string,"\n")
-    open(f"output_IIR/{fichier}_IIR.txt", 'w', encoding='UTF-8').write(string)
+    open(f"output_IIR/{file}_IIR.txt", 'w', encoding='UTF-8').write(string)
 
 
 
-fichier = "monarch_to_variations"
-paraToIIR(fichier)
+file = "monarch_to_variations"
+paraToIIR(file)

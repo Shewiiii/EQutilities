@@ -70,35 +70,35 @@ for raw in raws:
     except:
         pass
 
-dBgauche = {}
-dBdroite = {}
-dBMoy = {}
-for frequence in valeurs.keys():
-    for g in valeurs[frequence]:
+dBleft = {}
+dBright = {}
+dBavg = {}
+for frequency in valeurs.keys():
+    for g in valeurs[frequency]:
         if "(L)" in g.text:
-            dBgauche[frequence] = g.find('g').text
+            dBleft[frequency] = g.find('g').text
         elif "(R)" in g.text:
-            dBdroite[frequence] = g.find('g').text
+            dBright[frequency] = g.find('g').text
     if average == 1:
         try:
-            dBMoy[frequence] = str((float(dBgauche[frequence])+float(dBdroite[frequence]))/2)
+            dBavg[frequency] = str((float(dBleft[frequency])+float(dBright[frequency]))/2)
         except:
             pass
 
-print(dBgauche)
-print(dBdroite)
-print(dBMoy)
+print(dBleft)
+print(dBright)
+print(dBavg)
 
 if average == 1:
-    with open("résultats_scraping/C/FR_moyen.txt", 'w', encoding='UTF-8') as m:
+    with open("résultats_scraping/C/FR_AVG.txt", 'w', encoding='UTF-8') as m:
         m.write("\nFrequency	dB	Unweighted\n")
-        for i in dBgauche.keys():
-            m.write(i + "\t" + dBMoy[i] + "\n")
+        for i in dBleft.keys():
+            m.write(i + "\t" + dBavg[i] + "\n")
 else:
-    with open("résultats_scraping/C/FR_gauche.txt", 'w', encoding='UTF-8') as g:
-        with open("résultats_scraping/C/FR_droite.txt", 'w', encoding='UTF-8') as d:
+    with open("résultats_scraping/C/FR_left.txt", 'w', encoding='UTF-8') as g:
+        with open("résultats_scraping/C/FR_right.txt", 'w', encoding='UTF-8') as d:
             g.write("\nFrequency	dB	Unweighted\n")
             d.write("\nFrequency	dB	Unweighted\n")
-            for i in dBgauche.keys():
-                g.write(i + "\t" + dBgauche[i] + "\n")
-                d.write(i + "\t" + dBdroite[i] + "\n")
+            for i in dBleft.keys():
+                g.write(i + "\t" + dBleft[i] + "\n")
+                d.write(i + "\t" + dBright[i] + "\n")

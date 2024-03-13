@@ -66,47 +66,47 @@ for raw in raws:
     except:
         pass
 
-dBgauche = {}
-dBdroite = {}
-dBMoy = {}
-for frequence in valeurs.keys():
-    for g in valeurs[frequence]:
+dBleft = {}
+dBright = {}
+dBavg = {}
+for frequency in valeurs.keys():
+    for g in valeurs[frequency]:
         try:
             if discriminant != "" and discriminant in g.text:
-                dBMoy[frequence] = g.find('g').text
-                print(dBMoy)
+                dBavg[frequency] = g.find('g').text
+                print(dBavg)
             elif "(L)" in g.text:
-                dBgauche[frequence] = g.find('g').text
+                dBleft[frequency] = g.find('g').text
             elif "(R)" in g.text:
-                dBdroite[frequence] = g.find('g').text
+                dBright[frequency] = g.find('g').text
 
         except Exception as e:
             print(e)
             pass
 
 if average == 1 and discriminant == "": #split pour opti un peu
-    for frequence in valeurs.keys():
+    for frequency in valeurs.keys():
         try:
-            dBMoy[frequence] = str((float(dBgauche[frequence])+float(dBdroite[frequence]))/2)
+            dBavg[frequency] = str((float(dBleft[frequency])+float(dBright[frequency]))/2)
         except:
             pass
         else:
             break
 
-print(dBgauche)
-print(dBdroite)
-print(dBMoy)
+print(dBleft)
+print(dBright)
+print(dBavg)
 
 if average == 1:
-    with open("résultats_scraping/L/FR_moyen.txt", 'w', encoding='UTF-8') as m:
+    with open("résultats_scraping/L/FR_AVG.txt", 'w', encoding='UTF-8') as m:
         m.write("\nFrequency	dB	Unweighted\n")
-        for i in dBMoy.keys():
-            m.write(i + "\t" + dBMoy[i] + "\n")
+        for i in dBavg.keys():
+            m.write(i + "\t" + dBavg[i] + "\n")
 else:
-    with open("résultats_scraping/L/FR_gauche.txt", 'w', encoding='UTF-8') as g:
-        with open("résultats_scraping/L/FR_droite.txt", 'w', encoding='UTF-8') as d:
+    with open("résultats_scraping/L/FR_left.txt", 'w', encoding='UTF-8') as g:
+        with open("résultats_scraping/L/FR_right.txt", 'w', encoding='UTF-8') as d:
             g.write("\nFrequency	dB	Unweighted\n")
             d.write("\nFrequency	dB	Unweighted\n")
-            for i in dBgauche.keys():
-                g.write(i + "\t" + dBgauche[i] + "\n")
-                d.write(i + "\t" + dBdroite[i] + "\n")
+            for i in dBleft.keys():
+                g.write(i + "\t" + dBleft[i] + "\n")
+                d.write(i + "\t" + dBright[i] + "\n")

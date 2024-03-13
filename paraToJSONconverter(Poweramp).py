@@ -1,8 +1,8 @@
 from random import randint
 import re
 
-def getValues(fichier:str): #type 1: IIR, type 2: JSON
-    with open(f"input_ParaEQ/{fichier}.txt", 'r', encoding='UTF-8') as f:
+def getValues(file:str): #type 1: IIR, type 2: JSON
+    with open(f"input_ParaEQ/{file}.txt", 'r', encoding='UTF-8') as f:
         parametres = f.readlines()[1:]
         paraFiltres = []
         for i in parametres:
@@ -21,14 +21,14 @@ def getValues(fichier:str): #type 1: IIR, type 2: JSON
         valeurs.append([typePara] + re.findall(r'\d+', i)[1:] + [negatif])
     return valeurs
 
-def paraToJSON(fichier:str,preamp):
-    valeurs = getValues(fichier)
+def paraToJSON(file:str,preamp):
+    valeurs = getValues(file)
     bandes = [{"type":0,"channels":0,"frequency":90,"q":0,"gain":0.0,"color":0},{"type":1,"channels":0,"frequency":10000,"q":0,"gain":0.0,"color":0}]
     for filtre in valeurs:
         bandes.append({"type":filtre[0],"channels":0,"frequency":int(filtre[1]),"q":float(str(filtre[4])+"."+filtre[5]),"gain":float(str(filtre[6])+str(filtre[2])+"."+filtre[3]),"color": randint(-16711680,0)})
-    json_text = str([{"name":fichier,"preamp":preamp,"parametric": True,"bands": bandes}]).replace("'",'"').replace("True","true")
+    json_text = str([{"name":file,"preamp":preamp,"parametric": True,"bands": bandes}]).replace("'",'"').replace("True","true")
     print(json_text,"\n")
-    open(f"output_JSON/{fichier}_JSON.json", 'w', encoding='UTF-8').write(json_text)
+    open(f"output_JSON/{file}_JSON.json", 'w', encoding='UTF-8').write(json_text)
 
-a = "test"
-paraToJSON(a,0.0)
+file = "test"
+paraToJSON(file,0.0)
