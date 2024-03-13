@@ -5,46 +5,38 @@ from bs4 import BeautifulSoup
 
 driver = webdriver.Firefox()
 
-lien = "https://crinacle.com/graphs/iems/graphtool/?share=Diffuse_Field_Target,Variations&tilt=-0.8&tool=4620".replace("tilt=-0.8","tilt=-1")
+lien = "https://crinacle.com/graphs/iems/graphtool/?share=Diffuse_Field_Target,Aria&tilt=-0.8&tool=4620".replace("tilt=-0.8","tilt=-1")
 average = 1 #0: garde les 2 canaux, 1:fait la moyenne des deux
 driver.get(lien)
 
+def execute(script):
+    tries = 0
+    stop = 0
+    while stop == 0:
+        try:
+            driver.execute_script(script)
+            stop = 1
+        except:
+            time.sleep(0.1)
+            tries += 1
+            if tries >= 100:
+                stop = 1
+            pass
 
-stop = 0
-while stop == 0:
-    try:
-        driver.execute_script("window.scrollBy(0,2700); \
-                      document.getElementById('gdpr-consent-tool-wrapper').remove(); \
-                      document.getElementById('AdThrive_Footer_1_desktop').remove()")
-        stop = 1
-    except:
-        pass
-stop = 0
+execute("window.scrollBy(0,2700)")
+execute("document.getElementById('gdpr-consent-tool-wrapper').remove()")
+execute("document.getElementById('AdThrive_Footer_1_desktop').remove()")
 driver.switch_to.frame('GraphTool')
-while stop == 0:
-    try:
-        driver.execute_script("document.getElementById('expand-collapse').click(); \
-                        document.getElementById('inspector').click()")
-        stop = 1
-    except:
-        pass
-stop = 0
-
-while stop == 0:
-    try:
-        for i in range(2):
-            driver.execute_script("document.getElementsByClassName('button-baseline')[0].click()")
-        stop = 1
-    except:
-        pass
-stop = 0
-
+execute("document.getElementById('expand-collapse').click()")
+execute("document.getElementById('inspector').click()")
+for i in range(2):
+    execute("document.getElementsByClassName('button-baseline')[0].click()")
 input("go?")
+
 
 raws = []
 test = 0
 source1 = driver.page_source 
-stop = 0
 t0 = time.time()
 temps = 0
 print("go")
@@ -75,10 +67,14 @@ dBright = {}
 dBavg = {}
 for frequency in valeurs.keys():
     for g in valeurs[frequency]:
-        if "(L)" in g.text:
-            dBleft[frequency] = g.find('g').text
-        elif "(R)" in g.text:
-            dBright[frequency] = g.find('g').text
+        try:
+            if "(L)" in g.text:
+                dBleft[frequency] = g.find('g').text
+            elif "(R)" in g.text:
+                dBright[frequency] = g.find('g').text
+        except Exception as e:
+            print(e)
+            pass
     if average == 1:
         try:
             dBavg[frequency] = str((float(dBleft[frequency])+float(dBright[frequency]))/2)

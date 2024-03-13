@@ -2,7 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 from bs4 import BeautifulSoup
-
 driver = webdriver.Firefox()
 
 lien = "https://listener800.github.io/5128?share=Custom_Tilt,Sundara&bass=0&tilt=-1&treble=0&ear=0".replace("tilt=-0.8","tilt=-1")
@@ -13,27 +12,27 @@ temps_scraping = 20
 if discriminant != "":
     average = 1
 
+print(lien)
 driver.get(lien)
 
-stop = 0
-while stop == 0:
-    try:
-        driver.execute_script("document.getElementById('expand-collapse').click(); \
-                        document.getElementById('inspector').click()")
-        stop = 1
-    except:
-        pass
+def execute(script):
+    tries = 0
+    stop = 0
+    while stop == 0:
+        try:
+            driver.execute_script(script)
+            stop = 1
+        except:
+            time.sleep(0.1)
+            tries += 1
+            if tries >= 100:
+                stop = 1
+            pass
 
-stop = 0
-while stop == 0:
-    try:
-        for i in range(2):
-            driver.execute_script("document.getElementsByClassName('button-baseline')[0].click()")
-        stop = 1
-    except:
-        pass
-stop = 0
-
+execute("document.getElementById('expand-collapse').click()")
+execute("document.getElementById('inspector').click()")
+for i in range(2):
+    execute("document.getElementsByClassName('button-baseline')[0].click()")
 input("go?")
 
 
@@ -79,19 +78,15 @@ for frequency in valeurs.keys():
                 dBleft[frequency] = g.find('g').text
             elif "(R)" in g.text:
                 dBright[frequency] = g.find('g').text
-
         except Exception as e:
             print(e)
             pass
-
 if average == 1 and discriminant == "": #split pour opti un peu
     for frequency in valeurs.keys():
         try:
             dBavg[frequency] = str((float(dBleft[frequency])+float(dBright[frequency]))/2)
         except:
             pass
-        else:
-            break
 
 print(dBleft)
 print(dBright)
