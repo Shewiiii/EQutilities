@@ -12,8 +12,8 @@ Random repo containing B&K 5128's frequency responses and some tools to help EQi
 2. Open [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0).
 3. Click on `Equalizer`, then on `Upload FR`.
 4. Select the txt file.
-5. (Optional) Ajust the level of the Frequency Response by using the arrows on the new entry.
-6. Chose the target with the settings you want.
+5. (Optional) Adjust the level of the Frequency Response by using the arrows on the new entry.
+6. Choose the target with the settings you want.
 7. Done!
 > [!TIP]
 > The JM-1 with a -1dB/octave tilt can be considered as neutral for most people and is a great target to start. But while the JM-1 target (as well as the "5128 DF target") is a target based on objective data (Diffuse Field + Mixed HRTF compensation), the population average pinna effect and the 5128's canal effect are NOT the same as your ears. Thus, the target should be adjusted with a tilt that fits your own hearing (and preferences).
