@@ -2,7 +2,7 @@ Random repo containing B&K 5128's frequency responses and some tools to help EQi
 (Important note: I'm still learning Python so the code is very dirty)
 
 # How to use
-This repo should be used with [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0) (the B&K 5128 one). It has the more advanced tools (and no paywalls) to work with Frequency Response than [Crinacle's Database](https://crinacle.com/graphs/iems/graphtool/?share=Diffuse_Field_Target&tilt=-1&tool=4620) or [squig.link](https://squig.link/), such as Y-axis scale adjustment, more preferences adjustements to the target, or the JM-1 target (which a [more suitable target to use for IEMs](https://youtu.be/xKOrHq_7Uw4?si=P1KXwkYhuMucot58&t=350)).
+**This repo can be useful if you want to Equalize an IEM to sound like another IEM without buying a new one**, or simply if you want to analyse a Frequency Response in depth. It should be used with [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0) (the B&K 5128 one), since it has more advanced features (and no paywalls) to work with Frequency Response than [Crinacle's Database](https://crinacle.com/graphs/iems/graphtool/?share=Diffuse_Field_Target&tilt=-1&tool=4620) or [squig.link](https://squig.link/), such as Y-axis scale adjustment, more preferences adjustements to the target, or the JM-1 target (which a [more suitable target to use for IEMs](https://youtu.be/xKOrHq_7Uw4?si=P1KXwkYhuMucot58&t=350)).
 
 > [!WARNING]
 > More measurments available will be added in the future. It is also worth noting that the B&K 5128, while being the most accurate measurment rig available today, is expensive and has only been standardized recently, so relatively few measurements are available. 
@@ -32,9 +32,9 @@ This repo should be used with [Listener's Graph Database](https://listener800.gi
 In order to do this, follow the steps above, but instead of using the default targets, you can import the Frequency Response of an IEM, which can be used as a target in the `Equalizer` tab. Click on `Upload Target`, then you can AutoEQ.
 
 > [!IMPORTANT]
-> Please EQ the treble region by ear. The difference in HRTF with you and the measurment rig will probably result in a different Frequency Response between the graph and the the acutal sound to your eardums.
+> You may want to EQ the treble region by ear. The difference in HRTF with you and the measurment rig will probably result in a different Frequency Response between the graph and the the acutal sound to your eardums.
 
-## Import your EQ profile in Poweramp/Poweramp Equalizer (cursed)
+## Import your EQ profile in Poweramp/Poweramp Equalizer
 1. Copy the repo.
 2. On [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0), click on `Export Parametric EQ` to export the EQ profile you have just made, and save it in the `input_ParaEQ` folder.
 3. Open `paraToJSONconverter(Poweramp).py` and edit the `file` variable to the name of the file you have saved.
@@ -43,7 +43,7 @@ In order to do this, follow the steps above, but instead of using the default ta
 6. Done!
 
 
-## Import your EQ profile in HQPlayer 4 or 5 (cursed)
+## Import your EQ profile in HQPlayer 4 or 5
 1. Copy the repo.
 2. On [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0), click on `Export Parametric EQ` to export the EQ profile you have just made, and save it in the `input_ParaEQ` folder.
 3. Open `paraToIIRconverter.py` and edit the `file` variable to the name of the file you have saved.
