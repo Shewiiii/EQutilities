@@ -10,7 +10,7 @@ This repo should be used with [Listener's Graph Database](https://listener800.gi
 ## Import and visualize the Frequency Response of an IEM
 1. Download the txt file in the `frequency_responses` folder of the IEM you want.
 2. Open [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0).
-3. Click on `Equalizer`, then on `Import FR`.
+3. Click on `Equalizer`, then on `Upload FR`.
 4. Select the txt file.
 5. (Optional) Ajust the level of the Frequency Response by using the arrows on the new entry.
 6. Chose the target with the settings you want.
