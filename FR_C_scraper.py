@@ -2,15 +2,18 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 from bs4 import BeautifulSoup
+import traceback
 #https://github.com/Shewiiii/EQutilities
 
 driver = webdriver.Firefox()
-lien = "https://crinacle.com/graphs/iems/graphtool/?share=Diffuse_Field_Target,EA500_Black,EA1000_White&tilt=-0.8&tool=4620".replace("tilt=-0.8","tilt=-1")
-average = True #0: garde les 2 canaux, 1:fait la moyenne des deux
-dualMode = False
+lien = "https://crinacle.com/graphs/iems/graphtool/?share=Diffuse_Field_Target,EA500_Black&tilt=-1&tool=4620".replace("tilt=-0.8","tilt=-1")
+temps_scraping = 25
+average = False #0: garde les 2 canaux, 1:fait la moyenne des deux, ignoré si dualMode
+dualMode = False #Si False, mettre la FR pour L et R
 brand = "Simgot"
 iem1 = "EA500" #nom des IEM pour distinguer les valeurs lors du scraping (dualMode)
 iem2 = "EA1000"
+####################################
 driver.get(lien)
 
 def execute(script):
@@ -44,14 +47,14 @@ source1 = driver.page_source
 t0 = time.time()
 temps = 0
 print("go")
-while temps < 25: #à opti 
+while temps < temps_scraping: #à opti 
     temps = time.time() - t0
     try:
         source = driver.page_source 
         if source1 != source:
             source1 = source
             raws.append(source)
-            print(test)
+            print(test,temps,end="\r")
             test += 1
     except:
         pass
@@ -70,36 +73,51 @@ dBleft = {}
 dBright = {}
 dBavg = {}
 dBavg2 = {}
+def getGText():
+    gElement = g.find('g')
+    if gElement != None:
+        return gElement.text
+    else:
+        return None
+
 for frequency in valeurs.keys():
-    for g in valeurs[frequency]:
-        if dualMode == 1:
+    if dualMode == True:
+        for g in valeurs[frequency]:
             try:
-                if iem1 in g.text:
-                    dBavg[frequency] = g.find('g').text
-                elif iem2 in g.text:
-                    dBavg2[frequency] = g.find('g').text
-            except Exception as e:
-                print(e)
+                gtext = getGText()
+                if gtext != None:
+                    if iem1 in g.text:
+                        dBavg[frequency] = gtext
+                    elif iem2 in g.text:
+                        dBavg2[frequency] = gtext
+            except:
+                print(traceback.format_exc())
                 pass
-        else:
+    else:
+        for g in valeurs[frequency]:
             try:
-                if "(L)" in g.text:
-                    dBleft[frequency] = g.find('g').text
-                elif "(R)" in g.text:
-                    dBright[frequency] = g.find('g').text
-            except Exception as e:
-                print(e)
+                gtext = getGText()
+                if gtext != None:
+                    if "(L)" in g.text:
+                        dBleft[frequency] = gtext
+                    elif "(R)" in g.text:
+                        dBright[frequency] = gtext
+            except:
+                print(traceback.format_exc())
                 pass
-    if average == True and dualMode == False:
+
+if average == True and dualMode == False: #séparer pour opti un peu
+    for frequency in valeurs.keys():
         try:
             dBavg[frequency] = str((float(dBleft[frequency])+float(dBright[frequency]))/2)
         except:
+            print(traceback.format_exc())
             pass
 
-print(dBleft)
-print(dBright)
-print(dBavg)
-print(dBavg2)
+print("left:",dBleft)
+print("right:",dBright)
+print("average:",dBavg)
+print("average2:",dBavg2)
 
 def save(dBlist,path):
     with open(path, 'w', encoding='UTF-8') as e:
@@ -108,13 +126,13 @@ def save(dBlist,path):
             e.write(i + "\t" + dBlist[i] + "\n")
 
 if dualMode == True:
-    save(dBavg,f"résultats_scraping/C/{brand}_{iem1}_AVG.txt")
-    save(dBavg2,f"résultats_scraping/C/{brand}_{iem2}_AVG.txt")
+    save(dBavg,f"résultats_scraping/C/{brand} {iem1} (AVG).txt")
+    save(dBavg2,f"résultats_scraping/C/{brand} {iem2} (AVG).txt")
 elif average == True:
-    save(dBavg,f"résultats_scraping/C/{brand}_{iem1}_AVG.txt")
+    save(dBavg,f"résultats_scraping/C/{brand} {iem1}_(AVG).txt")
 else:
-    save(dBleft,f"résultats_scraping/C/{brand}_{iem1}_Left.txt")
-    save(dBright,f"résultats_scraping/C/{brand}_{iem1}_Right.txt")
+    save(dBleft,f"résultats_scraping/C/{brand} {iem1} (L).txt")
+    save(dBright,f"résultats_scraping/C/{brand} {iem1} (R).txt")
 
 
 
