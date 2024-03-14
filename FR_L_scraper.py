@@ -2,15 +2,17 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 from bs4 import BeautifulSoup
-driver = webdriver.Firefox()
+import traceback
+#https://github.com/Shewiiii/EQutilities
 
-lien = "https://listener800.github.io/5128?share=Custom_Tilt,Sundara&bass=0&tilt=-1&treble=0&ear=0".replace("tilt=-0.8","tilt=-1")
-average = 1 #0: garde les 2 canaux, 1:fait la moyenne des deux
-discriminant = "moyen" #texte présent dans le label, pour le différencier des autres valeurs spl (à utiliser si une seule courbe) 
-temps_scraping = 20
+driver = webdriver.Firefox()
+lien = "https://listener800.github.io/5128?share=Custom_Tilt,U6t,ScarletMini,Crimson,Helios,Hexa,Nova&bass=0&tilt=-1&treble=0&ear=0".replace("tilt=-0.8","tilt=-1")
+average = True #0: garde les 2 canaux, 1:fait la moyenne des deux
+multiMode = True
+brand = ["FATFreq","Symphonium","Truthear","Truthear","Symphonium","64 audio"]
+iems = ["Scarlet Mini","Crimson (Azla Sedna Tips)","Hexa","Nova (AET07 Tips)","Helios (Azla Sedna Tips)","U6t (m20)"] 
+temps_scraping = 35
 ####################################
-if discriminant != "":
-    average = 1
 
 print(lien)
 driver.get(lien)
@@ -50,58 +52,87 @@ while temps < temps_scraping: #à opti
         if source1 != source:
             source1 = source
             raws.append(source)
-            print(test)
+            print(test,temps,end="\r")
             test += 1
     except:
         pass
 
 
 print("analyse")
-valeurs = {}
+values = {}
 for raw in raws:
     try:
         rawBS = BeautifulSoup(raw, features="html.parser")
-        valeurs[rawBS.findAll('text',{'class':'insp_dB'})[0].text.replace(" Hz","")] = rawBS.findAll('g',{'class':'lineLabel'})
+        values[rawBS.findAll('text',{'class':'insp_dB'})[0].text.replace(" Hz","")] = rawBS.findAll('g',{'class':'lineLabel'})
     except:
         pass
 
 dBleft = {}
 dBright = {}
 dBavg = {}
-for frequency in valeurs.keys():
-    for g in valeurs[frequency]:
-        try:
-            if discriminant != "" and discriminant in g.text:
-                dBavg[frequency] = g.find('g').text
-                print(dBavg)
-            elif "(L)" in g.text:
-                dBleft[frequency] = g.find('g').text
-            elif "(R)" in g.text:
-                dBright[frequency] = g.find('g').text
-        except Exception as e:
-            print(e)
-            pass
-if average == 1 and discriminant == "": #split pour opti un peu
-    for frequency in valeurs.keys():
+iemsdB = {}
+
+def getGText():
+    gElement = g.find('g')
+    if gElement != None:
+        return gElement.text
+    else:
+        return None
+
+if multiMode == True:
+    for iem in iems:
+        dBavg = {}
+        for frequency in values.keys():
+            for g in values[frequency]:
+                try:
+                    gtext = getGText()
+                    if iem in g.text and gtext != None:
+                        dBavg[frequency] = gtext
+                        break
+                except:
+                    print(traceback.format_exc())
+                    pass
+        iemsdB[iem] = dBavg
+else:
+    for frequency in values.keys():
+        for g in values[frequency]:
+            try:
+                gtext = getGText()
+                if getGText != None:
+                    if iems[0] in g.text:
+                        dBavg[frequency] = gtext
+                        break
+                    elif "(L)" in g.text:
+                        dBleft[frequency] = gtext
+                    elif "(R)" in g.text:
+                        dBright[frequency] = gtext
+            except:
+                print(traceback.format_exc())
+                pass
+    if average == True and multiMode == False:
         try:
             dBavg[frequency] = str((float(dBleft[frequency])+float(dBright[frequency]))/2)
         except:
+            print(traceback.format_exc())
             pass
 
-print(dBleft)
-print(dBright)
-print(dBavg)
+print("left:",dBleft)
+print("right:",dBright)
+print("average:",dBavg)
 
-if average == 1:
-    with open("résultats_scraping/L/FR_AVG.txt", 'w', encoding='UTF-8') as m:
-        m.write("\nFrequency	dB	Unweighted\n")
-        for i in dBavg.keys():
-            m.write(i + "\t" + dBavg[i] + "\n")
+def save(dBlist,path):
+    with open(path, 'w', encoding='UTF-8') as e:
+        e.write("\nFrequency	dB	Unweighted\n")
+        for i in dBlist.keys():
+            e.write(i + "\t" + dBlist[i] + "\n")
+if multiMode == True:
+    num = 0
+    for iem,dB in iemsdB.items():
+        save(dB,f"résultats_scraping/L/{brand[num]} {iem} (AVG).txt")
+        num+=1
+elif average == True:
+    save(dBavg,dBright)
 else:
-    with open("résultats_scraping/L/FR_left.txt", 'w', encoding='UTF-8') as g:
-        with open("résultats_scraping/L/FR_right.txt", 'w', encoding='UTF-8') as d:
-            g.write("\nFrequency	dB	Unweighted\n")
-            d.write("\nFrequency	dB	Unweighted\n")
-            for i in dBleft.keys():
-                g.write(i + "\t" + dBleft[i] + "\n")
-                d.write(i + "\t" + dBright[i] + "\n")
+    save(dBleft,f"résultats_scraping/L/{brand[0]} {iems[0]} (L).txt")
+    save(dBright,f"résultats_scraping/L/{brand[0]} {iems[0]} (R).txt")
+
