@@ -2,11 +2,15 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 from bs4 import BeautifulSoup
+#https://github.com/Shewiiii/EQutilities
 
 driver = webdriver.Firefox()
-
-lien = "https://crinacle.com/graphs/iems/graphtool/?share=Diffuse_Field_Target,Aria&tilt=-0.8&tool=4620".replace("tilt=-0.8","tilt=-1")
-average = 1 #0: garde les 2 canaux, 1:fait la moyenne des deux
+lien = "https://crinacle.com/graphs/iems/graphtool/?share=Diffuse_Field_Target,EA500_Black,EA1000_White&tilt=-0.8&tool=4620".replace("tilt=-0.8","tilt=-1")
+average = True #0: garde les 2 canaux, 1:fait la moyenne des deux
+dualMode = False
+brand = "Simgot"
+iem1 = "EA500" #nom des IEM pour distinguer les valeurs lors du scraping (dualMode)
+iem2 = "EA1000"
 driver.get(lien)
 
 def execute(script):
@@ -65,17 +69,28 @@ for raw in raws:
 dBleft = {}
 dBright = {}
 dBavg = {}
+dBavg2 = {}
 for frequency in valeurs.keys():
     for g in valeurs[frequency]:
-        try:
-            if "(L)" in g.text:
-                dBleft[frequency] = g.find('g').text
-            elif "(R)" in g.text:
-                dBright[frequency] = g.find('g').text
-        except Exception as e:
-            print(e)
-            pass
-    if average == 1:
+        if dualMode == 1:
+            try:
+                if iem1 in g.text:
+                    dBavg[frequency] = g.find('g').text
+                elif iem2 in g.text:
+                    dBavg2[frequency] = g.find('g').text
+            except Exception as e:
+                print(e)
+                pass
+        else:
+            try:
+                if "(L)" in g.text:
+                    dBleft[frequency] = g.find('g').text
+                elif "(R)" in g.text:
+                    dBright[frequency] = g.find('g').text
+            except Exception as e:
+                print(e)
+                pass
+    if average == True and dualMode == False:
         try:
             dBavg[frequency] = str((float(dBleft[frequency])+float(dBright[frequency]))/2)
         except:
@@ -84,17 +99,22 @@ for frequency in valeurs.keys():
 print(dBleft)
 print(dBright)
 print(dBavg)
+print(dBavg2)
 
-if average == 1:
-    with open("résultats_scraping/C/FR_AVG.txt", 'w', encoding='UTF-8') as m:
-        m.write("\nFrequency	dB	Unweighted\n")
-        for i in dBleft.keys():
-            m.write(i + "\t" + dBavg[i] + "\n")
+def save(dBlist,path):
+    with open(path, 'w', encoding='UTF-8') as e:
+        e.write("\nFrequency	dB	Unweighted\n")
+        for i in dBlist.keys():
+            e.write(i + "\t" + dBlist[i] + "\n")
+
+if dualMode == True:
+    save(dBavg,f"résultats_scraping/C/{brand}_{iem1}_AVG.txt")
+    save(dBavg2,f"résultats_scraping/C/{brand}_{iem2}_AVG.txt")
+elif average == True:
+    save(dBavg,f"résultats_scraping/C/{brand}_{iem1}_AVG.txt")
 else:
-    with open("résultats_scraping/C/FR_left.txt", 'w', encoding='UTF-8') as g:
-        with open("résultats_scraping/C/FR_right.txt", 'w', encoding='UTF-8') as d:
-            g.write("\nFrequency	dB	Unweighted\n")
-            d.write("\nFrequency	dB	Unweighted\n")
-            for i in dBleft.keys():
-                g.write(i + "\t" + dBleft[i] + "\n")
-                d.write(i + "\t" + dBright[i] + "\n")
+    save(dBleft,f"résultats_scraping/C/{brand}_{iem1}_Left.txt")
+    save(dBright,f"résultats_scraping/C/{brand}_{iem1}_Right.txt")
+
+
+
