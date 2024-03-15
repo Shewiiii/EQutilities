@@ -1,8 +1,8 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 import time
 from bs4 import BeautifulSoup
 import traceback
+from scrapingFunctions import *
 #https://github.com/Shewiiii/EQutilities
 
 driver = webdriver.Firefox()
@@ -11,33 +11,19 @@ temps_scraping = 25
 average = False #0: garde les 2 canaux, 1:fait la moyenne des deux, ignoré si dualMode
 dualMode = False #Si False, mettre la FR pour L et R
 brand = "Simgot"
-iem1 = "EA500" #nom des IEM pour distinguer les valeurs lors du scraping (dualMode)
+iem1 = "EA500" #nom des IEM pour distinguer les values lors du scraping (dualMode)
 iem2 = "EA1000"
 ####################################
 driver.get(lien)
 
-def execute(script):
-    tries = 0
-    stop = 0
-    while stop == 0:
-        try:
-            driver.execute_script(script)
-            stop = 1
-        except:
-            time.sleep(0.1)
-            tries += 1
-            if tries >= 100:
-                stop = 1
-            pass
-
-execute("window.scrollBy(0,2700)")
-execute("document.getElementById('gdpr-consent-tool-wrapper').remove()")
-execute("document.getElementById('AdThrive_Footer_1_desktop').remove()")
+execute(driver,"window.scrollBy(0,2700)")
+execute(driver,"document.getElementById('gdpr-consent-tool-wrapper').remove()")
+execute(driver,"document.getElementById('AdThrive_Footer_1_desktop').remove()")
 driver.switch_to.frame('GraphTool')
-execute("document.getElementById('expand-collapse').click()")
-execute("document.getElementById('inspector').click()")
+execute(driver,"document.getElementById('expand-collapse').click()")
+execute(driver,"document.getElementById('inspector').click()")
 for i in range(2):
-    execute("document.getElementsByClassName('button-baseline')[0].click()")
+    execute(driver,"document.getElementsByClassName('button-baseline')[0].click()")
 input("go?")
 
 
@@ -60,12 +46,12 @@ while temps < temps_scraping: #à opti
         pass
 
 
-print("analyse")
-valeurs = {}
+print("analyse                 ")
+values = {}
 for raw in raws:
     try:
         rawBS = BeautifulSoup(raw, features="html.parser")
-        valeurs[rawBS.findAll('text',{'class':'insp_dB'})[0].text.replace(" Hz","")] = rawBS.findAll('g',{'class':'lineLabel'}) #[3:6]
+        values[rawBS.findAll('text',{'class':'insp_dB'})[0].text.replace(" Hz","")] = rawBS.findAll('g',{'class':'lineLabel'}) #[3:6]
     except:
         pass
 
@@ -73,18 +59,12 @@ dBleft = {}
 dBright = {}
 dBavg = {}
 dBavg2 = {}
-def getGText():
-    gElement = g.find('g')
-    if gElement != None:
-        return gElement.text
-    else:
-        return None
 
-for frequency in valeurs.keys():
+for frequency in values.keys():
     if dualMode == True:
-        for g in valeurs[frequency]:
+        for g in values[frequency]:
             try:
-                gtext = getGText()
+                gtext = getGText(g)
                 if gtext != None:
                     if iem1 in g.text:
                         dBavg[frequency] = gtext
@@ -94,9 +74,9 @@ for frequency in valeurs.keys():
                 print(traceback.format_exc())
                 pass
     else:
-        for g in valeurs[frequency]:
+        for g in values[frequency]:
             try:
-                gtext = getGText()
+                gtext = getGText(g)
                 if gtext != None:
                     if "(L)" in g.text:
                         dBleft[frequency] = gtext
@@ -107,7 +87,7 @@ for frequency in valeurs.keys():
                 pass
 
 if average == True and dualMode == False: #séparer pour opti un peu
-    for frequency in valeurs.keys():
+    for frequency in values.keys():
         try:
             dBavg[frequency] = str((float(dBleft[frequency])+float(dBright[frequency]))/2)
         except:

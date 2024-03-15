@@ -1,40 +1,26 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 import time
 from bs4 import BeautifulSoup
 import traceback
+from scrapingFunctions import *
 #https://github.com/Shewiiii/EQutilities
 
 driver = webdriver.Firefox()
-lien = "https://listener800.github.io/5128?share=Custom_Tilt,U6t,ScarletMini,Crimson,Helios,Hexa,Nova&bass=0&tilt=-1&treble=0&ear=0".replace("tilt=-0.8","tilt=-1")
+lien = "https://listener800.github.io/5128?share=Custom_Tilt,RED,LCD2,Utopia2022AVG,DT770,580,HD600,HD650,HD660S2,HD800S,IE200&bass=0&tilt=-1&treble=0&ear=0".replace("tilt=-0.8","tilt=-1")
 average = True #0: garde les 2 canaux, 1:fait la moyenne des deux
 multiMode = True
-brand = ["FATFreq","Symphonium","Truthear","Truthear","Symphonium","64 audio"]
-iems = ["Scarlet Mini","Crimson (Azla Sedna Tips)","Hexa","Nova (AET07 Tips)","Helios (Azla Sedna Tips)","U6t (m20)"] 
-temps_scraping = 35
+brand = ["Audeze","Truthear","Beyerdynamic","Focal","Sennheiser","Sennheiser","Sennheiser","Sennheiser","Sennheiser","Sennheiser"]
+iems = ["LCD-2.0","RED","DT770 Pro","Utopia 2022","HD 580 Precision","HD 600","HD 650","HD 660S2","HD 800S","IE 200"] 
+temps_scraping = 60
 ####################################
 
 print(lien)
 driver.get(lien)
 
-def execute(script):
-    tries = 0
-    stop = 0
-    while stop == 0:
-        try:
-            driver.execute_script(script)
-            stop = 1
-        except:
-            time.sleep(0.1)
-            tries += 1
-            if tries >= 100:
-                stop = 1
-            pass
-
-execute("document.getElementById('expand-collapse').click()")
-execute("document.getElementById('inspector').click()")
+execute(driver,"document.getElementById('expand-collapse').click()")
+execute(driver,"document.getElementById('inspector').click()")
 for i in range(2):
-    execute("document.getElementsByClassName('button-baseline')[0].click()")
+    execute(driver,"document.getElementsByClassName('button-baseline')[0].click()")
 input("go?")
 
 
@@ -58,7 +44,7 @@ while temps < temps_scraping: #à opti
         pass
 
 
-print("analyse")
+print("analyse                 ")
 values = {}
 for raw in raws:
     try:
@@ -72,20 +58,13 @@ dBright = {}
 dBavg = {}
 iemsdB = {}
 
-def getGText():
-    gElement = g.find('g')
-    if gElement != None:
-        return gElement.text
-    else:
-        return None
-
 if multiMode == True:
     for iem in iems:
         dBavg = {}
         for frequency in values.keys():
             for g in values[frequency]:
                 try:
-                    gtext = getGText()
+                    gtext = getGText(g)
                     if iem in g.text and gtext != None:
                         dBavg[frequency] = gtext
                         break
@@ -97,7 +76,7 @@ else:
     for frequency in values.keys():
         for g in values[frequency]:
             try:
-                gtext = getGText()
+                gtext = getGText(g)
                 if getGText != None:
                     if iems[0] in g.text:
                         dBavg[frequency] = gtext
