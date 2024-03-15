@@ -29,11 +29,14 @@ Random repo containing B&K 5128's frequency responses and some tools to help EQi
 > Adding more filters by clicking on the `+` button will result in an Equalization closer to the target. If the loading screen gets stucked, remove the `extra-eq-overlay` div in the source code of the website. Change the frequency range to 20-20000hz to EQ the full audible range.
 
 ## AutoEQ an IEM to another IEM
+### With presets (recommended)
+Many auto-generated EQs are available in the `presets` folder.
+### Manually
 In order to do this, follow the steps above, but instead of using the default targets, you can import the Frequency Response of an IEM, which can be used as a target in the `Equalizer` tab. Click on `Upload Target`, then you can AutoEQ.
 > [!IMPORTANT]
 > You may want to EQ the treble region by ear. The difference in HRTF with you and the measurment rig will probably result in a different Frequency Response between the graph and the the acutal sound to your eardums.
 
-## Import your EQ profile in Poweramp/Poweramp Equalizer
+## Import your EQ profile in Poweramp/Poweramp Equalizer manually
 1. Copy the repo.
 2. On [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0), click on `Export Parametric EQ` to export the EQ profile you have just made, and save it in the `input_ParaEQ` folder.
 3. Open `paraToJSONconverter(Poweramp).py` and edit the `file` variable to the name of the file you have saved.
@@ -43,7 +46,7 @@ In order to do this, follow the steps above, but instead of using the default ta
 > [!IMPORTANT]
 > If you are using Poweramp Equalizer, switch the `Band Overlap` setting to `Cascade`.
 
-## Import your EQ profile in HQPlayer 4 or 5
+## Import your EQ profile in HQPlayer 4 or 5 manually
 1. Copy the repo.
 2. On [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0), click on `Export Parametric EQ` to export the EQ profile you have just made, and save it in the `input_ParaEQ` folder.
 3. Open `paraToIIRconverter.py` and edit the `file` variable to the name of the file you have saved.
