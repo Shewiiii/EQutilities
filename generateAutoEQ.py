@@ -87,6 +87,8 @@ def batchAutoEQ(path,filenames,targetname,mode=1):
 
 
 for iem in filenames:
-    batchAutoEQ(path,filenames,iem.replace('.txt',''),mode=2)
+    batchAutoEQ(path,filenames[1:],iem.replace('.txt',''),mode=2)
+    for _ in range(2):
+        execute(driver,'document.getElementsByClassName("remove")[2].click()')
 
 
