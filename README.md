@@ -24,7 +24,7 @@ Many auto-generated EQs are available in the `presets` folder:
 5. Done!
    
 > [!WARNING]
-> AutoEQ is not 100% accurate above 10khz (especially if the IEM has a treble peak). You can check the EQ on [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0). Follow [these steps](https://github.com/Shewiiii/EQutilities/edit/main/README.md#import-and-visualize-the-frequency-response-of-an-iem), then click on `Import EQ` and choose the EQ in the `Parametric` folder. 
+> AutoEQ is not 100% accurate above 10khz (especially if the IEM has a treble peak). You can check the EQ on [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0). Follow [these steps](https://github.com/Shewiiii/EQutilities/blob/main/README.md#import-and-visualize-the-frequency-response-of-an-iem), then click on `Import EQ` and choose the EQ in the `Parametric` folder. 
 ### Manually
 In order to do this, follow [these steps](https://github.com/Shewiiii/EQutilities/blob/main/README.md#autoeq-an-iem-to-a-chosen-target), but instead of using the default targets, you can import the Frequency Response of an IEM, which can be used as a target in the `Equalizer` tab. Click on `Upload Target`, then you can AutoEQ.
 > [!IMPORTANT]
