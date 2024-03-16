@@ -66,13 +66,13 @@ def batchAutoEQ(path,filenames,targetname):
             try:
                 file_input.send_keys(path+file)
                 driver.find_element(By.CLASS_NAME,'autoeq').click()
-                time.sleep(2.5)
+                driver.find_element(By.CLASS_NAME,'export-filters').click()
                 try:
+                    time.sleep(0.3)
+                    driver._switch_to.alert.dismiss()
                     driver.find_element(By.CLASS_NAME,'export-filters').click()
                 except:
-                    time.sleep(2)
-                    driver.find_element(By.CLASS_NAME,'export-filters').click()
-
+                    pass
                 filename = next(walk(renamepath), (None, None, []))[2][0]
                 rename(f'{renamepath}/{filename}',newpath)
                 shutil.move(newpath,final)
@@ -107,3 +107,4 @@ def go(fromm=0):
         except:
             pass
 
+go()
