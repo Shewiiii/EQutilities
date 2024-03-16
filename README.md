@@ -29,10 +29,15 @@ Random repo containing B&K 5128's frequency responses and some tools to help EQi
 > Adding more filters by clicking on the `+` button will result in an Equalization closer to the target. If the loading screen gets stucked, remove the `extra-eq-overlay` div in the source code of the website. Change the frequency range to 20-20000hz to EQ the full audible range.
 
 ## AutoEQ an IEM to another IEM
-### With presets (recommended)
-Many auto-generated EQs are available in the `presets` folder.
+### With a preset (recommended)
+Many auto-generated EQs are available in the `presets` folder:
+1. If available, click on the folder of the IEM you want to EQ.
+2. Click on the folder corresponding to the EQ format you want (if you are using Peace or another parametric EQ software, select `Parametric`, if you are using HQPlayer, select `IIR`)
+3. Download the file of the IEM you want to EQ to
+4. Import the file (or copy the values if Parametric) in your EQ software/app
+5. Done!
 ### Manually
-In order to do this, follow the steps above, but instead of using the default targets, you can import the Frequency Response of an IEM, which can be used as a target in the `Equalizer` tab. Click on `Upload Target`, then you can AutoEQ.
+In order to do this, follow the steps in the paragraph above, but instead of using the default targets, you can import the Frequency Response of an IEM, which can be used as a target in the `Equalizer` tab. Click on `Upload Target`, then you can AutoEQ.
 > [!IMPORTANT]
 > You may want to EQ the treble region by ear. The difference in HRTF with you and the measurment rig will probably result in a different Frequency Response between the graph and the the acutal sound to your eardums.
 
