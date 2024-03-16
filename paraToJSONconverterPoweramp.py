@@ -32,4 +32,4 @@ def paraToJSON(file:str,inputfolder,outputfolder):
 
 if __name__=="__main__":
     file = "test"
-    paraToJSON(file,'input_ParaEQ','output_IIR')
+    paraToJSON(file,'input_ParaEQ','output_JSON')
