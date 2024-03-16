@@ -7,6 +7,26 @@ Random repo containing B&K 5128's frequency responses and some tools to help EQi
 > [!WARNING]
 > More measurments available will be added in the future. It is also worth noting that the B&K 5128, while being the most accurate measurment rig available today, is expensive and has only been standardized recently, so relatively few measurements are available. 
 
+## AutoEQ an IEM to another IEM
+### With a preset (recommended)
+#### Currently Compatible apps:
+- Wavelet
+- Poweramp
+- Poweramp Equalizer
+- HQPlayer (IIR plugin)
+- (Parametric EQ apps, you have to enter the values manually)
+
+Many auto-generated EQs are available in the `presets` folder:
+1. If available, click on the folder of the IEM you want to EQ.
+2. Click on the folder corresponding to the EQ format you want (if you are using Peace or another parametric EQ software, select `Parametric`, if you are using HQPlayer, select `IIR`).
+3. Download the file of the IEM you want to EQ to.
+4. Import the file (or copy the values if Parametric) in your EQ app.
+5. Done!
+### Manually
+In order to do this, follow [these steps](https://github.com/Shewiiii/EQutilities/blob/main/README.md#autoeq-an-iem-to-a-chosen-target), but instead of using the default targets, you can import the Frequency Response of an IEM, which can be used as a target in the `Equalizer` tab. Click on `Upload Target`, then you can AutoEQ.
+> [!IMPORTANT]
+> You may want to EQ the treble region by ear. The difference in HRTF with you and the measurment rig will probably result in a different Frequency Response between the graph and the the acutal sound to your eardums.
+
 ## Import and visualize the Frequency Response of an IEM
 1. Download the txt file in the `frequency_responses` folder of the IEM you want.
 2. Open [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0).
@@ -28,24 +48,11 @@ Random repo containing B&K 5128's frequency responses and some tools to help EQi
 > [!TIP]
 > Adding more filters by clicking on the `+` button will result in an Equalization closer to the target. If the loading screen gets stucked, remove the `extra-eq-overlay` div in the source code of the website. Change the frequency range to 20-20000hz to EQ the full audible range.
 
-## AutoEQ an IEM to another IEM
-### With a preset (recommended)
-Many auto-generated EQs are available in the `presets` folder:
-1. If available, click on the folder of the IEM you want to EQ.
-2. Click on the folder corresponding to the EQ format you want (if you are using Peace or another parametric EQ software, select `Parametric`, if you are using HQPlayer, select `IIR`)
-3. Download the file of the IEM you want to EQ to
-4. Import the file (or copy the values if Parametric) in your EQ software/app
-5. Done!
-### Manually
-In order to do this, follow the steps in the paragraph above, but instead of using the default targets, you can import the Frequency Response of an IEM, which can be used as a target in the `Equalizer` tab. Click on `Upload Target`, then you can AutoEQ.
-> [!IMPORTANT]
-> You may want to EQ the treble region by ear. The difference in HRTF with you and the measurment rig will probably result in a different Frequency Response between the graph and the the acutal sound to your eardums.
-
 ## Import your EQ profile in Poweramp/Poweramp Equalizer manually
 1. Copy the repo.
 2. On [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0), click on `Export Parametric EQ` to export the EQ profile you have just made, and save it in the `input_ParaEQ` folder.
 3. Open `paraToJSONconverter(Poweramp).py` and edit the `file` variable to the name of the file you have saved.
-4. Execute the file. A JSON file will be created in the `output_JSON` folder.
+4. Run the file. A JSON file will be created in the `output_JSON` folder.
 5. Import the file in Poweramp: in the app, go to the Equalizer tab, then click on the 3 dots. You can import your file from here.
 6. Done!
 > [!IMPORTANT]
@@ -55,7 +62,7 @@ In order to do this, follow the steps in the paragraph above, but instead of usi
 1. Copy the repo.
 2. On [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0), click on `Export Parametric EQ` to export the EQ profile you have just made, and save it in the `input_ParaEQ` folder.
 3. Open `paraToIIRconverter.py` and edit the `file` variable to the name of the file you have saved.
-4. Execute the file. A txt file will be created in the `output_IIR` folder, and the EQ string will be displayed in the console.
+4. Run the file. A txt file will be created in the `output_IIR` folder, and the EQ string will be displayed in the console.
 5. Copy the string in HQPlayer: in the software, click on `Matrix`, then `Pipeline setup...`
 6. In the first 2 raws, copy the string in the `Process` column
 7. Put de pre-gain value in the `Gain` column
