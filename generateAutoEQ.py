@@ -48,7 +48,7 @@ def batchAutoEQ(path,filenames,targetname):
     erreurs = []
     filenames = [filenames[0]] + filenames
     dir = f'./presets/{targetname}'
-    adddir(f'./presets/{targetname}')
+    adddir(dir)
     for type in ['Parametric','IIR','Poweramp','Wavelet']:
         adddir(f'{dir}/{type}')
     driver.find_element(By.CLASS_NAME,'upload-fr').click()
@@ -92,6 +92,48 @@ def batchAutoEQ(path,filenames,targetname):
             print('skipped:',file)
     return erreurs
 
+def getTarget(driver):
+    return driver.find_element(By.CLASS_NAME,'lineLabel').text.replace('/','').replace(':','')
+
+def betterAutoEQ(path=path,filenames=filenames):
+    input('Choose a target on the tool')
+    target = getTarget(driver)
+    erreurs = []
+    filenames = [filenames[0]] + filenames
+    dir = f'./betterAutoEQ/{target}'
+    adddir(dir)
+    driver.find_element(By.CLASS_NAME,'upload-fr').click()
+    file_input = driver.find_element(By.ID, 'file-fr')
+    for file in filenames:
+
+        renamepath = "./rename_input"
+        newname = f"{file.replace('.txt','')} [{target}].txt"
+        newpath = f'{renamepath}/{newname}'
+        final = f'{dir}/{newname}'
+
+        if not Path(final).is_file():
+            try:
+                file_input.send_keys(path+file)
+                driver.find_element(By.CLASS_NAME,'autoeq').click()
+                driver.find_element(By.CLASS_NAME,'export-filters').click()
+                try:
+                    time.sleep(0.3)
+                    driver._switch_to.alert.dismiss()
+                    driver.find_element(By.CLASS_NAME,'export-filters').click()
+                except:
+                    pass
+                filename = next(walk(renamepath), (None, None, []))[2][0]
+                rename(f'{renamepath}/{filename}',newpath)
+                shutil.move(newpath,final)
+                for i in range(2):
+                    execute(driver,'document.getElementsByClassName("remove")[2].click()')
+            except:
+                print(traceback.format_exc())
+                input('')
+                erreurs.append(file)
+        else:
+            print('skipped:',file)
+    return erreurs
 erreurs = {}
 num = 0
 for filename in filenames:
@@ -106,5 +148,3 @@ def go(fromm=0):
                 driver.execute_script('document.getElementsByClassName("remove")[2].click()')
         except:
             pass
-
-go()
