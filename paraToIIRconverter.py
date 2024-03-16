@@ -32,5 +32,5 @@ def paraToIIR(file:str,inputfolder,outputfolder):
 
 
 if __name__=="__main__":
-    file = "monarch_to_salnoteszero"
+    file = "test"
     paraToIIR(file,'input_ParaEQ','output_IIR')
