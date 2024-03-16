@@ -9,6 +9,7 @@ from scrapingFunctions import *
 from paraToIIRconverter import paraToIIR
 from paraToJSONconverterPoweramp import paraToJSON
 import time
+from pathlib import Path
 
 options = Options()
 options.set_preference("browser.download.folderList", 2)
@@ -44,10 +45,6 @@ def adddir(dir):
         print('Dossier preset déjà existant')
 
 def batchAutoEQ(path,filenames,targetname):
-    '''AutoEQ tous les IEMs désignés.
-    mode=1: EQ tous les IEMs à une target donnée
-    mode=2: EQ un IEM à toutes les targets données
-    '''
     erreurs = []
     filenames = [filenames[0]] + filenames
     dir = f'./presets/{targetname}'
@@ -59,7 +56,13 @@ def batchAutoEQ(path,filenames,targetname):
     file_input.send_keys(path+targetname+'.txt')
     driver.find_element(By.CLASS_NAME,'upload-target').click()
     for file in filenames:
-        if targetname != file.replace('.txt',''):
+
+        renamepath = "./rename_input"
+        newname = f"EQ to {file}"
+        newpath = f'{renamepath}/{newname}'
+        final = f'{dir}/Parametric/{newname}'
+
+        if targetname != file.replace('.txt','') and not Path(final).is_file():
             try:
                 file_input.send_keys(path+file)
                 driver.find_element(By.CLASS_NAME,'autoeq').click()
@@ -69,13 +72,9 @@ def batchAutoEQ(path,filenames,targetname):
                 except:
                     time.sleep(2)
                     driver.find_element(By.CLASS_NAME,'export-filters').click()
-                renamepath = "./rename_input"
 
                 filename = next(walk(renamepath), (None, None, []))[2][0]
-                newname = f"EQ to {file}"
-                newpath = f'{renamepath}/{newname}'
                 rename(f'{renamepath}/{filename}',newpath)
-                final = f'{dir}/Parametric/{newname}'
                 shutil.move(newpath,final)
 
                 driver.find_element(By.CLASS_NAME,'export-graphic-filters').click()
@@ -89,12 +88,22 @@ def batchAutoEQ(path,filenames,targetname):
                 print(traceback.format_exc())
                 input('')
                 erreurs.append(file)
+        else:
+            print('skipped:',file)
     return erreurs
 
 erreurs = {}
-for iem in filenames[0:]:
-    erreurs[iem] = batchAutoEQ(path,filenames,iem.replace('.txt',''))
-    for _ in range(2):
-        execute(driver,'document.getElementsByClassName("remove")[2].click()')
+num = 0
+for filename in filenames:
+    print(f'{num}. {filename}')
+    num +=1
 
+def go(fromm=0):
+    for iem in filenames[fromm:]:
+        erreurs[iem] = batchAutoEQ(path,filenames,iem.replace('.txt',''))
+        try:
+            for _ in range(2):
+                driver.execute_script('document.getElementsByClassName("remove")[2].click()')
+        except:
+            pass
 

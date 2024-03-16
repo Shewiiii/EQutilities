@@ -8,7 +8,8 @@ def execute(driver,script):
         try:
             driver.execute_script(script)
             stop = 1
-        except:
+        except Exception as e:
+            print(e)
             time.sleep(0.1)
             tries += 1
             if tries >= 100:
