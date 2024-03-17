@@ -24,6 +24,13 @@ If you want your IEM to sound like another one without buying it, or if you want
 
 > [!WARNING]
 > More measurments available will be added in the future. It is also worth noting that the B&K 5128, while being the most accurate measurment rig available today, is expensive and has only been standardized recently, so relatively few measurements are available.
+#### Currently Compatible apps:
+- Wavelet
+- Poweramp
+- Poweramp Equalizer
+- HQPlayer (IIR plugin)
+- (Parametric EQ apps, you have to enter the values manually)
+
 
 ## AutoEQ an IEM to a chosen target
 ### With a preset (recommended)
@@ -45,13 +52,6 @@ If you want your IEM to sound like another one without buying it, or if you want
 
 ## AutoEQ an IEM to another IEM
 ### With a preset (recommended)
-#### Currently Compatible apps:
-- Wavelet
-- Poweramp
-- Poweramp Equalizer
-- HQPlayer (IIR plugin)
-- (Parametric EQ apps, you have to enter the values manually)
-
 1. Open the `preset` folder, then `IEM_to_IEM`.
 2. Select the folder corresponding to the EQ format you want (if you are using Peace or another parametric EQ software, select `Parametric`, if you are using HQPlayer, select `IIR`).
 3. Download the file of the IEM you want to EQ to.
