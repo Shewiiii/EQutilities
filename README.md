@@ -4,13 +4,13 @@ Random repo containing B&K 5128's frequency responses and many EQ presets to cus
 # How to use
 This repo should be used with [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0) (the B&K 5128 one), since it has more advanced features (and no paywalls) to work with Frequency Response than [Crinacle's Database](https://crinacle.com/graphs/iems/graphtool/?share=Diffuse_Field_Target&tilt=-1&tool=4620) or [squig.link](https://squig.link/), such as Y-axis scale adjustment, more preferences adjustements to the target, or the JM-1 target (which a [more suitable target to use with IEMs](https://youtu.be/xKOrHq_7Uw4?si=P1KXwkYhuMucot58&t=350)).
 
-## Why this repo ?
-
 - [AutoEQ an IEM to a chosen target](https://github.com/Shewiiii/EQutilities?tab=readme-ov-file#autoeq-an-iem-to-a-chosen-target)
 - [AutoEQ an IEM to another IEM](https://github.com/Shewiiii/EQutilities?tab=readme-ov-file#autoeq-an-iem-to-another-iem)
 - [Import and visualize the Frequency Response of an IEM](https://github.com/Shewiiii/EQutilities?tab=readme-ov-file#import-and-visualize-the-frequency-response-of-an-iem)
 - [Import your EQ profile in Poweramp/Poweramp Equalizer manually](https://github.com/Shewiiii/EQutilities?tab=readme-ov-file#import-your-eq-profile-in-poweramppoweramp-equalizer-manually)
 - [Import your EQ profile in HQPlayer 4 or 5 manually](https://github.com/Shewiiii/EQutilities?tab=readme-ov-file#import-your-eq-profile-in-hqplayer-4-or-5-manually)
+
+## Why this repo ?
   
 ### A better autoEQ
 While [AutoEQ](https://github.com/jaakkopasanen/AutoEq) by Jaakko Pasanen is a wonderful project that allows you to EQ thousands of headphones and IEMs easily, his equalization profiles have severe flaws, especially with IEMs:
