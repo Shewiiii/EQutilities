@@ -10,6 +10,12 @@ This repo should be used with [Listener's Graph Database](https://listener800.gi
 - [Import your EQ profile in Poweramp/Poweramp Equalizer manually](https://github.com/Shewiiii/EQutilities?tab=readme-ov-file#import-your-eq-profile-in-poweramppoweramp-equalizer-manually)
 - [Import your EQ profile in HQPlayer 4 or 5 manually](https://github.com/Shewiiii/EQutilities?tab=readme-ov-file#import-your-eq-profile-in-hqplayer-4-or-5-manually)
 
+#### Apps compatible with AutoEQ presets:
+- Wavelet
+- Poweramp
+- Poweramp Equalizer
+- HQPlayer (IIR plugin)
+- (Parametric EQ apps, you have to enter the values manually)
 ## Why this repo ?
   
 ### A better autoEQ
@@ -24,13 +30,6 @@ If you want your IEM to sound like another one without buying it, or if you want
 
 > [!WARNING]
 > More measurments available will be added in the future. It is also worth noting that the B&K 5128, while being the most accurate measurment rig available today, is expensive and has only been standardized recently, so relatively few measurements are available.
-#### Currently Compatible apps:
-- Wavelet
-- Poweramp
-- Poweramp Equalizer
-- HQPlayer (IIR plugin)
-- (Parametric EQ apps, you have to enter the values manually)
-
 
 ## AutoEQ an IEM to a chosen target
 ### With a preset (recommended)
@@ -66,7 +65,7 @@ In order to do this, follow [these steps](https://github.com/Shewiiii/EQutilitie
 > You may want to EQ the treble region by ear. The difference in HRTF with you and the measurment rig will probably result in a different Frequency Response between the graph and the the acutal sound to your eardums.
 
 ## Import and visualize the Frequency Response of an IEM
-1. Download the txt file in the `frequency_responses` folder of the IEM you want.
+1. Download the txt file of the IEM you want in the `frequency_responses` folder.
 2. Open [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0).
 3. Click on `Equalizer`, then on `Upload FR`.
 4. Select the txt file.
