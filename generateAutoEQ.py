@@ -47,7 +47,7 @@ def adddir(dir):
 def batchAutoEQ(path,filenames,targetname):
     erreurs = []
     filenames = [filenames[0]] + filenames
-    dir = f'./presets/{targetname}'
+    dir = f'./presets/betterAutoEQ/{targetname}'
     adddir(dir)
     for type in ['Parametric','IIR','Poweramp','Wavelet']:
         adddir(f'{dir}/{type}')
@@ -100,8 +100,10 @@ def betterAutoEQ(path=path,filenames=filenames):
     target = getTarget(driver)
     erreurs = []
     filenames = [filenames[0]] + filenames
-    dir = f'./betterAutoEQ/{target}'
+    dir = f'./presets/betterAutoEQ/{target}'
     adddir(dir)
+    for type in ['Parametric','IIR','Poweramp','Wavelet']:
+        adddir(f'{dir}/{type}')
     driver.find_element(By.CLASS_NAME,'upload-fr').click()
     file_input = driver.find_element(By.ID, 'file-fr')
     for file in filenames:
@@ -109,7 +111,7 @@ def betterAutoEQ(path=path,filenames=filenames):
         renamepath = "./rename_input"
         newname = f"{file.replace('.txt','')} [{target}].txt"
         newpath = f'{renamepath}/{newname}'
-        final = f'{dir}/{newname}'
+        final = f'{dir}/Parametric/{newname}'
 
         if not Path(final).is_file():
             try:
@@ -125,6 +127,14 @@ def betterAutoEQ(path=path,filenames=filenames):
                 filename = next(walk(renamepath), (None, None, []))[2][0]
                 rename(f'{renamepath}/{filename}',newpath)
                 shutil.move(newpath,final)
+
+                driver.find_element(By.CLASS_NAME,'export-graphic-filters').click()
+                rename(f'{renamepath}/{filename.replace('Filters','Graphic Filters')}',newpath)
+                shutil.move(newpath,f'{dir}/Wavelet/{newname}')
+
+                paraToJSON(newname.replace('.txt',''),f'{dir}/Parametric',f'{dir}/Poweramp')
+                paraToIIR(newname.replace('.txt',''),f'{dir}/Parametric',f'{dir}/IIR')
+
                 for i in range(2):
                     execute(driver,'document.getElementsByClassName("remove")[2].click()')
             except:
