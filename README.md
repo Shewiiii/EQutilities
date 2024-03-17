@@ -1,4 +1,4 @@
-Random repo containing B&K 5128's frequency responses and some tools to help EQing IEMs.
+Random repo containing B&K 5128's frequency responses and many EQ presets to customize your listening experience with IEMs.
 (Important note: I'm still learning Python so the code is very dirty)
 
 # How to use
