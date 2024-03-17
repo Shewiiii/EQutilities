@@ -13,8 +13,8 @@ This repo should be used with [Listener's Graph Database](https://listener800.gi
 - [Import your EQ profile in HQPlayer 4 or 5 manually](https://github.com/Shewiiii/EQutilities?tab=readme-ov-file#import-your-eq-profile-in-hqplayer-4-or-5-manually)
   
 ### A better autoEQ
-While [AutoEQ](https://github.com/jaakkopasanen/AutoEq) by Jaakko Pasanen is a wonderful project that allows you to EQ thousands of headphones and IEMs easily, his equalization profiles has severe downsides, especially with IEMs:
-- All measurments have been made using the 711 coupler, which has a way less human-like acoustic input impedence than the B&K 5128, and is very inaccurate above 10khz. This can lead to imprecise measurements on a large portion of the audible spectrum and thus should not be used for autoEQ.
+While [AutoEQ](https://github.com/jaakkopasanen/AutoEq) by Jaakko Pasanen is a wonderful project that allows you to EQ thousands of headphones and IEMs easily, his equalization profiles have severe flaws, especially with IEMs:
+- All the measurments behind the EQ profiles have been made using the 711 coupler, which has a way less human-like acoustic input impedence than the B&K 5128, and is very inaccurate above 10khz. This can lead to imprecise measurements on a large portion of the audible spectrum and thus should not be used for autoEQ.
 - AutoEQ equalizes IEMs and earphones to the Harman In-Ear target. The research behind it [has many issues](https://headphones.com/blogs/features/the-shape-of-iems-to-come#section-3-1) and should not be used anymore, otherwise you will get a shouty sound with too much bass.
   
 In this repo, all EQ profiles are based on the B&K 5128, the most accurate measurment rig available to this day, and have been created using more relevent targets such as JM-1. The EQ results should be much more enjoyable and "neutral" than autoEQ's. 
