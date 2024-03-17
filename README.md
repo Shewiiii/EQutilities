@@ -42,7 +42,7 @@ If you want your IEM to sound like another one without buying it, or if you want
 6. Done!
 ### Manually
 1. Open [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0).
-2. Import the Frequency Response of the IEM you want to EQ (see [this](https://github.com/Shewiiii/EQutilities/blob/main/README.md#import-and-visualize-the-frequency-response-of-an-iem))
+2. Import the Frequency Response of the IEM you want to EQ (see [this](https://github.com/Shewiiii/EQutilities?tab=readme-ov-file#import-and-visualize-the-frequency-response-of-an-iem))
 3. Adjust the target to your liking with the `5128 Target` and `Preferences Adjustments` panels
 4. In the `Equalizer` tab, adjust the settings to your liking and click `AutoEQ`
 5. Import the generated values in your EQ software
@@ -59,9 +59,9 @@ If you want your IEM to sound like another one without buying it, or if you want
 5. Done!
    
 > [!WARNING]
-> AutoEQ is not 100% accurate above 10khz (especially if the IEM has a treble peak). You can check the EQ on [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0): follow [these steps](https://github.com/Shewiiii/EQutilities/blob/main/README.md#import-and-visualize-the-frequency-response-of-an-iem), then click on `Import EQ` and choose the EQ in the `Parametric` folder. You can now compare the new Frequency Response with the target IEM by importing its Frequency Response as well. 
+> AutoEQ is not 100% accurate above 10khz (especially if the IEM has a treble peak). You can check the EQ on [Listener's Graph Database](https://listener800.github.io/5128?share=Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0): follow [these steps](https://github.com/Shewiiii/EQutilities?tab=readme-ov-file#import-and-visualize-the-frequency-response-of-an-iem), then click on `Import EQ` and choose the EQ in the `Parametric` folder. You can now compare the new Frequency Response with the target IEM by importing its Frequency Response as well. 
 ### Manually
-In order to do this, follow [these steps](https://github.com/Shewiiii/EQutilities/blob/main/README.md#autoeq-an-iem-to-a-chosen-target), but instead of using the default targets, you can import the Frequency Response of an IEM, which can be used as a target in the `Equalizer` tab. Click on `Upload Target`, then you can AutoEQ.
+In order to do this, follow [these steps](https://github.com/Shewiiii/EQutilities?tab=readme-ov-file#autoeq-an-iem-to-a-chosen-target), but instead of using the default targets, you can import the Frequency Response of an IEM, which can be used as a target in the `Equalizer` tab. Click on `Upload Target`, then you can AutoEQ.
 > [!IMPORTANT]
 > You may want to EQ the treble region by ear. The difference in HRTF with you and the measurment rig will probably result in a different Frequency Response between the graph and the the acutal sound to your eardums.
 
