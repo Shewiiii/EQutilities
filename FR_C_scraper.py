@@ -6,13 +6,13 @@ from scrapingFunctions import *
 #https://github.com/Shewiiii/EQutilities
 
 driver = webdriver.Firefox()
-lien = "https://crinacle.com/graphs/iems/graphtool/?share=Diffuse_Field_Target,EA500_Black&tilt=-1&tool=4620".replace("tilt=-0.8","tilt=-1")
+lien = "https://crinacle.com/graphs/iems/graphtool/?share=Diffuse_Field_Target,IER-Z1R,Midnight&tilt=-0.8&tool=4620".replace("tilt=-0.8","tilt=-1")
 temps_scraping = 25
-average = False #0: garde les 2 canaux, 1:fait la moyenne des deux, ignoré si dualMode
-dualMode = False #Si False, mettre la FR pour L et R
-brand = "Simgot"
-iem1 = "EA500" #nom des IEM pour distinguer les values lors du scraping (dualMode)
-iem2 = "EA1000"
+average = True #0: garde les 2 canaux, 1:fait la moyenne des deux, ignoré si dualMode
+dualMode = True #Si False, mettre la FR pour L et R
+brand = "Sennheiser"
+iem1 = "Yume" #nom des IEM pour distinguer les values lors du scraping (dualMode)
+iem2 = "IER-Z1R"
 ####################################
 driver.get(lien)
 

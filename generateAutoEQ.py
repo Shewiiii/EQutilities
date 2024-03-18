@@ -14,7 +14,7 @@ from pathlib import Path
 options = Options()
 options.set_preference("browser.download.folderList", 2)
 options.set_preference("browser.download.manager.showWhenStarting", False)
-options.set_preference("browser.download.dir", "C:\\Users\\anhki\\Documents\\Scolaire\\FR_Scraper\\rename_input")
+options.set_preference("browser.download.dir", "C:\\Users\\anhki\\Documents\\Scolaire\\EQutilities\\rename_input")
 options.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/x-gzip")
 driver = webdriver.Firefox(options=options)
 
@@ -35,8 +35,9 @@ file_input = driver.find_element(By.NAME, 'autoeq-q-to')
 file_input.clear()
 file_input.send_keys('10')
 
-path = "C:\\Users\\anhki\\Documents\\Scolaire\\FR_Scraper\\frequency_responses\\" #relative path doesnt work wtf
+path = "C:\\Users\\anhki\\Documents\\Scolaire\\EQutilities\\frequency_responses\\" #relative path doesnt work wtf
 filenames = next(walk(path), (None, None, []))[2]
+redo = ['Sennheiser IE200 (AVG).txt']
 
 def adddir(dir):
     try:
@@ -47,7 +48,7 @@ def adddir(dir):
 def batchAutoEQ(path,filenames,targetname):
     erreurs = []
     filenames = [filenames[0]] + filenames
-    dir = f'./presets/betterAutoEQ/{targetname}'
+    dir = f'./presets/IEM_to_IEM/{targetname}'
     adddir(dir)
     for type in ['Parametric','IIR','Poweramp','Wavelet']:
         adddir(f'{dir}/{type}')
@@ -62,7 +63,7 @@ def batchAutoEQ(path,filenames,targetname):
         newpath = f'{renamepath}/{newname}'
         final = f'{dir}/Parametric/{newname}'
 
-        if targetname != file.replace('.txt','') and not Path(final).is_file():
+        if targetname != file.replace('.txt','') and not Path(final).is_file() and file not in redo:
             try:
                 file_input.send_keys(path+file)
                 driver.find_element(By.CLASS_NAME,'autoeq').click()
@@ -95,7 +96,7 @@ def batchAutoEQ(path,filenames,targetname):
 def getTarget(driver):
     return driver.find_element(By.CLASS_NAME,'lineLabel').text.replace('/','').replace(':','')
 
-def betterAutoEQ(path=path,filenames=filenames):
+def betterAutoEQ(path=path,filenames=filenames, redo=redo):
     input('Choose a target on the tool')
     target = getTarget(driver)
     erreurs = []
@@ -113,7 +114,7 @@ def betterAutoEQ(path=path,filenames=filenames):
         newpath = f'{renamepath}/{newname}'
         final = f'{dir}/Parametric/{newname}'
 
-        if not Path(final).is_file():
+        if not Path(final).is_file() and file not in redo:
             try:
                 file_input.send_keys(path+file)
                 driver.find_element(By.CLASS_NAME,'autoeq').click()
@@ -158,3 +159,8 @@ def go(fromm=0):
                 driver.execute_script('document.getElementsByClassName("remove")[2].click()')
         except:
             pass
+
+
+
+go()
+batchAutoEQ()
