@@ -25,6 +25,13 @@ While [AutoEQ](https://github.com/jaakkopasanen/AutoEq) by Jaakko Pasanen is a w
   
 In this repo, all EQ profiles are based on the B&K 5128, the most accurate measurment rig available to this day, and have been created using more relevent targets such as JM-1. The EQ results should be much more enjoyable and "neutral" than autoEQ's. 
 
+#### Available Targets:
+- 5128 Diffuse Field (-0.8 or -1dB/oct. Tilt)
+- JM-1 (-0.8 or -1dB/oct. Tilt)
+- Soundguys Target (Personnal favorite, sounds very technical)
+
+The more the slope is important, the more "dark" the sound will be.
+
 ### Easily EQ your IEM to another IEM
 If you want your IEM to sound like another one without buying it, or if you want to vary your listening experience, you can do it easely with the presets available in this repo. Even though the EQ won't result in the same sound as the actual IEM because of HRTF and acousitc impedence variation, you should get *pretty* close to it. 
 
@@ -34,7 +41,7 @@ If you want your IEM to sound like another one without buying it, or if you want
 ## AutoEQ an IEM to a chosen target
 ### With a preset (recommended)
 1. Open the `preset` folder, then `betterAutoEQ`.
-2. Select the folder corresponding to the target you want (you should use JM-1 for IEMs, and 5128 for headphones).
+2. Select the folder corresponding to the target you want.
 3. Select the folder corresponding to the EQ format you want (if you are using Peace or another parametric EQ software, select `Parametric`, if you are using HQPlayer, select `IIR`).
 4. Download the file of the IEM you want to EQ.
 5. Import the file (or copy the values if Parametric) in your EQ app.
