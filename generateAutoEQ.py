@@ -162,5 +162,3 @@ def go(fromm=0):
 
 
 
-go()
-batchAutoEQ()
