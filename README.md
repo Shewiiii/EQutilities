@@ -31,6 +31,8 @@ In this repo, all EQ profiles are based on the B&K 5128, the most accurate measu
 - Soundguys Target (Personnal favorite, sounds very technical)
 
 The more the slope is important, the more "dark" the sound will be.
+#### Target comparaison:
+![target comparaison graph](https://github.com/Shewiiii/EQutilities/blob/52da7d51b58c0000437800e0828d8c989eba4476/presets/betterAutoEQ/Targets.png)
 
 ### Easily EQ your IEM to another IEM
 If you want your IEM to sound like another one without buying it, or if you want to vary your listening experience, you can do it easely with the presets available in this repo. Even though the EQ won't result in the same sound as the actual IEM because of HRTF and acousitc impedence variation, you should get *pretty* close to it. 
