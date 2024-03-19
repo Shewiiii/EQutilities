@@ -6,12 +6,12 @@ from scrapingFunctions import *
 #https://github.com/Shewiiii/EQutilities
 
 driver = webdriver.Firefox()
-lien = "https://listener800.github.io/5128?share=Custom_Tilt,RED,LCD2,Utopia2022AVG,DT770,580,HD600,HD650,HD660S2,HD800S,IE200&bass=0&tilt=-1&treble=0&ear=0".replace("tilt=-0.8","tilt=-1")
+lien = "https://listener800.github.io/5128?share=Custom_Tilt,SoundGuys_Target,Custom_Tilt&bass=0&tilt=-1&treble=0&ear=0".replace("tilt=-0.8","tilt=-1")
 average = True #0: garde les 2 canaux, 1:fait la moyenne des deux
 multiMode = True
-brand = ["Audeze","Truthear","Beyerdynamic","Focal","Sennheiser","Sennheiser","Sennheiser","Sennheiser","Sennheiser","Sennheiser"]
-iems = ["LCD-2.0","RED","DT770 Pro","Utopia 2022","HD 580 Precision","HD 600","HD 650","HD 660S2","HD 800S","IE 200"] 
-temps_scraping = 60
+brand = ["","",""]
+iems = ["SoundGuys","JM-1","5128 DF"] 
+temps_scraping = 30
 ####################################
 
 print(lien)
