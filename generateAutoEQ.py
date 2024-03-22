@@ -45,7 +45,7 @@ def adddir(dir):
     except:
         print('Dossier preset déjà existant')
 
-def batchAutoEQ(path,filenames,targetname):
+def iemiemEQ(path,filenames,targetname):
     erreurs = []
     filenames = [filenames[0]] + filenames
     dir = f'./presets/IEM_to_IEM/{targetname}'
@@ -96,8 +96,9 @@ def batchAutoEQ(path,filenames,targetname):
 def getTarget(driver):
     return driver.find_element(By.CLASS_NAME,'lineLabel').text.replace('/','').replace(':','')
 
-def betterAutoEQ(path=path,filenames=filenames, redo=redo):
-    input('Choose a target on the tool')
+def betterAutoEQ(path=path,filenames=filenames, redo=redo,manual=True):
+    if manual == True:
+        input('Choose a target on the tool')
     target = getTarget(driver)
     erreurs = []
     filenames = [filenames[0]] + filenames
@@ -151,14 +152,29 @@ for filename in filenames:
     print(f'{num}. {filename}')
     num +=1
 
-def go(fromm=0):
-    for iem in filenames[fromm:]:
-        erreurs[iem] = batchAutoEQ(path,filenames,iem.replace('.txt',''))
+def autoiemiemEQ():
+    for iem in filenames:
+        erreurs[iem] = iemiemEQ(path,filenames,iem.replace('.txt',''))
         try:
             for _ in range(2):
                 driver.execute_script('document.getElementsByClassName("remove")[2].click()')
         except:
             pass
 
+def autoAutoEQ():
+    targets = {'5128 DF':(-1,0,0,0),'5128 DF':(-0.8,0,0,-3),'JM-1 (IEM)':(-1,0,0,0),'JM-1 (IEM)':(-0.8,0,0,0),'SoundGuys':(0,0,0,0)} #tuple: tilt, ear gain in dB, first one will always will be -1dB tilt DF HRTF
+    supported = ['5128 DF','JM-1 (IEM)']
+    for target,adjustmentsValues in targets.items():
+        betterAutoEQ(manual=False)
+        if not target in driver.find_element(By.CLASS_NAME,'lineLabel').text:
+            driver.find_element(By.XPATH,(f"//*[contains(text(),'{target}')]")).click()
+        adjustments = ['cusdf-tilt','cusdf-bass','cusdf-treb','cusdf-ear']
+        if target in supported:
+            for i in range(4):
+                file_input = driver.find_element(By.ID, adjustments[i])
+                file_input.clear()
+                file_input.send_keys(str(adjustmentsValues[i]))
 
-
+def all():
+    autoiemiemEQ()
+    autoAutoEQ()
