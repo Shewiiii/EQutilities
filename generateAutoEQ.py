@@ -177,4 +177,5 @@ def autoAutoEQ():
 
 def all():
     autoiemiemEQ()
+    driver.find_element(By.XPATH,(f"//*[contains(text(),'5128 DF')]")).click()
     autoAutoEQ()
