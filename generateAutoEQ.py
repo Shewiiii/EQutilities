@@ -45,7 +45,7 @@ def adddir(dir):
     except:
         print('Dossier preset déjà existant')
 
-def iemiemEQ(path,filenames,targetname):
+def iemiemEQ(path,filenames,targetname,redo=redo):
     erreurs = []
     filenames = [filenames[0]] + filenames
     dir = f'./presets/IEM_to_IEM/{targetname}'
@@ -162,7 +162,7 @@ def autoiemiemEQ():
             pass
 
 def autoAutoEQ():
-    targets = {'5128 DF':(-1,0,0,0),'5128 DF':(-0.8,0,0,-3),'JM-1 (IEM)':(-1,0,0,0),'JM-1 (IEM)':(-0.8,0,0,0),'SoundGuys':(0,0,0,0)} #tuple: tilt, ear gain in dB, first one will always will be -1dB tilt DF HRTF
+    targets = {'5128 DF':(-1,0,0,0),'5128 DF':(-1,0,0,-3),'JM-1 (IEM)':(-1,0,0,0),'JM-1 (IEM)':(-0.8,0,0,0),'SoundGuys':(0,0,0,0)} #tuple: tilt, ear gain in dB, first one will always will be -1dB tilt DF HRTF
     supported = ['5128 DF','JM-1 (IEM)']
     for target,adjustmentsValues in targets.items():
         betterAutoEQ(manual=False)
@@ -174,7 +174,7 @@ def autoAutoEQ():
                 file_input = driver.find_element(By.ID, adjustments[i])
                 file_input.clear()
                 file_input.send_keys(str(adjustmentsValues[i]))
-
+    betterAutoEQ(manual=False)
 def all():
     autoiemiemEQ()
     driver.find_element(By.XPATH,(f"//*[contains(text(),'5128 DF')]")).click()
