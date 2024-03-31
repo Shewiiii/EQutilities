@@ -31,5 +31,5 @@ def paraToJSON(file:str,inputfolder,outputfolder):
     open(f"{outputfolder}/{file}.json", 'w', encoding='UTF-8').write(json_text)
 
 if __name__=="__main__":
-    file = "test"
+    file = "Storm_reworked"
     paraToJSON(file,'input_ParaEQ','output_JSON')

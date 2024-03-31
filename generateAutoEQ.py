@@ -175,7 +175,18 @@ def autoAutoEQ():
                 file_input.clear()
                 file_input.send_keys(str(adjustmentsValues[i]))
     betterAutoEQ(manual=False)
+
 def all():
     autoiemiemEQ()
     driver.find_element(By.XPATH,(f"//*[contains(text(),'5128 DF')]")).click()
     autoAutoEQ()
+
+def showAllFR(limit=9999): #useful to show the resonance peak
+    driver.find_element(By.CLASS_NAME,'upload-fr').click()
+    n = 0
+    for FR in filenames:
+        file_input = driver.find_element(By.ID, 'file-fr')
+        file_input.send_keys(path+FR)
+        n +=1
+        if n >= limit:
+            return

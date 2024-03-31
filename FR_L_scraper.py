@@ -10,7 +10,7 @@ lien = "https://listener800.github.io/5128?share=Custom_Tilt,SoundGuys_Target,Cu
 average = True #0: garde les 2 canaux, 1:fait la moyenne des deux
 multiMode = True
 brand = ["","",""]
-iems = ["SoundGuys","JM-1","5128 DF"] 
+iems = ["EQ",""] 
 temps_scraping = 30
 ####################################
 

@@ -32,5 +32,5 @@ def paraToIIR(file:str,inputfolder,outputfolder):
 
 
 if __name__=="__main__":
-    file = "test"
+    file = "Storm_reworked"
     paraToIIR(file,'input_ParaEQ','output_IIR')
