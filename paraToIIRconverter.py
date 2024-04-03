@@ -32,5 +32,5 @@ def paraToIIR(file:str,inputfolder,outputfolder):
 
 
 if __name__=="__main__":
-    file = "Storm_reworked"
+    file = "Sony WF-1000xm4 (AVG) [Harman Beta (2024) Target]"
     paraToIIR(file,'input_ParaEQ','output_IIR')
